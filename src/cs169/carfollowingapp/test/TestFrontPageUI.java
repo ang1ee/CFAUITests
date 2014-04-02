@@ -85,6 +85,12 @@ public class TestFrontPageUI extends UiAutomatorTestCase {
         activityLabel = new UiSelector().text("FrontPageActivity");
         assertNotNull("Wrong activity opened for FrontPageActivity when stop broadcast", activityLabel);
         
+        UiObject logoutButton = new UiObject(new UiSelector().text("Logout"));
+        logoutButton.clickAndWaitForNewWindow();
+        
+        activityLabel = new UiSelector().text("LoginActivity");
+        assertNotNull("Wrong activity opened", activityLabel);
+        
     }
 
     protected void tearDown() throws Exception {
