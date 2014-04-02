@@ -11,11 +11,7 @@ public class TestLoginUI extends UiAutomatorTestCase {
 
     protected void setUp() throws Exception {
         super.setUp();
-    }
-    
-    public void testLogin() throws UiObjectNotFoundException {   
-        
-        // Simulate a short press on the HOME button.
+
         getUiDevice().pressHome();
         
         // We’re now in the home screen. Next, we want to simulate 
@@ -46,9 +42,6 @@ public class TestLoginUI extends UiAutomatorTestCase {
         UiScrollable appViews = new UiScrollable(new UiSelector()
            .scrollable(true));
         
-//        // Set the swiping mode to horizontal (the default is vertical)
-//        appViews.setAsHorizontalList();
-        
         // Create a UiSelector to find the Settings app and simulate      
         // a user click to launch the app. 
         UiObject cfaApp = appViews.getChildByText(new UiSelector()
@@ -61,8 +54,10 @@ public class TestLoginUI extends UiAutomatorTestCase {
            .packageName("cs169.carfollowingapp"));
         assertTrue("Unable to detect app", 
            cfaValidation.exists());   
-        
-        
+                    
+    }
+    
+    public void testLoginSuccess() throws UiObjectNotFoundException {   
         UiObject usernameInput = new UiObject(new UiSelector().description("Username"));
         UiObject passwordInput = new UiObject(new UiSelector().description("Password"));
         UiObject loginButton = new UiObject(new UiSelector().text("Login"));
@@ -71,9 +66,39 @@ public class TestLoginUI extends UiAutomatorTestCase {
         passwordInput.setText("test");
         loginButton.clickAndWaitForNewWindow();
                 
-        UiSelector activityLabel = new UiSelector().text("FrontPageActivity");
-        assertNotNull("Wrong activity opened", activityLabel);
+        UiObject label = new UiObject(new UiSelector().text("FrontPageActivity"));
+        assertNotNull("FrontPageActivity", label.getText());
+        
+        UiObject logoutButton = new UiObject(new UiSelector().text("Logout"));
+        logoutButton.clickAndWaitForNewWindow();
     }
+    
+    public void testLoginNoSuchUser() throws UiObjectNotFoundException {   
+        
+        UiObject usernameInput = new UiObject(new UiSelector().description("Username"));
+        UiObject loginButton = new UiObject(new UiSelector().text("Login"));
+        
+        usernameInput.setText("NoSuchUser");
+        loginButton.click();
+        
+        UiObject errorBox = new UiObject(new UiSelector().description("error text box"));
+        assertEquals("User does not exist.", errorBox.getText());
+        
+    }    
+    
+    public void testLoginIncorrectPassword() throws UiObjectNotFoundException {   
+        
+        UiObject usernameInput = new UiObject(new UiSelector().description("Username"));
+        UiObject loginButton = new UiObject(new UiSelector().text("Login"));
+        
+        usernameInput.setText("test");
+        loginButton.click();
+        
+        UiObject errorBox = new UiObject(new UiSelector().description("error text box"));
+        assertEquals("Incorrect password.", errorBox.getText());
+        
+    }    
+    
 
     protected void tearDown() throws Exception {
         super.tearDown();
