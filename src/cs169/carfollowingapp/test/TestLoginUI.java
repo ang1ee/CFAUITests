@@ -13,7 +13,7 @@ public class TestLoginUI extends UiAutomatorTestCase {
         super.setUp();
     }
     
-    public void testDemo() throws UiObjectNotFoundException {   
+    public void testLogin() throws UiObjectNotFoundException {   
         
         // Simulate a short press on the HOME button.
         getUiDevice().pressHome();
@@ -46,8 +46,8 @@ public class TestLoginUI extends UiAutomatorTestCase {
         UiScrollable appViews = new UiScrollable(new UiSelector()
            .scrollable(true));
         
-        // Set the swiping mode to horizontal (the default is vertical)
-        appViews.setAsHorizontalList();
+//        // Set the swiping mode to horizontal (the default is vertical)
+//        appViews.setAsHorizontalList();
         
         // Create a UiSelector to find the Settings app and simulate      
         // a user click to launch the app. 
@@ -61,7 +61,19 @@ public class TestLoginUI extends UiAutomatorTestCase {
            .packageName("cs169.carfollowingapp"));
         assertTrue("Unable to detect app", 
            cfaValidation.exists());   
-    }     
+        
+        
+        UiObject usernameInput = new UiObject(new UiSelector().description("Username"));
+        UiObject passwordInput = new UiObject(new UiSelector().description("Password"));
+        UiObject loginButton = new UiObject(new UiSelector().text("Login"));
+        
+        usernameInput.setText("test");
+        passwordInput.setText("test");
+        loginButton.clickAndWaitForNewWindow();
+                
+        UiSelector activityLabel = new UiSelector().text("FrontPageActivity");
+        assertNotNull("Wrong activity opened", activityLabel);
+    }
 
     protected void tearDown() throws Exception {
         super.tearDown();
