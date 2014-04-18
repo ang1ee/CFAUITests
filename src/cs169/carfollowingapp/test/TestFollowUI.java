@@ -76,18 +76,24 @@ public class TestFollowUI extends UiAutomatorTestCase {
         assertNotNull("Wrong activity opened", activityLabel);
         
         UiObject followButton = new UiObject(new UiSelector().text("Follow"));
+        followButton.clickAndWaitForNewWindow();
+        activityLabel = new UiSelector().text("SelectBroadcasterActivity");
+        assertNotNull("Wrong activity opened", activityLabel);
+        
+        followButton = new UiObject(new UiSelector().text("Follow"));
         UiObject followUsernameInput = new UiObject(new UiSelector().description("followUsername"));
         followUsernameInput.setText("NoSuchUser");
         followButton.click();
         
         UiObject errorBox = new UiObject(new UiSelector().description("error text box"));
         assertEquals("No such broadcasting user.", errorBox.getText());
-        
+    }
+        /*
         UiObject logoutButton = new UiObject(new UiSelector().text("Logout"));
         logoutButton.clickAndWaitForNewWindow();
-        
         activityLabel = new UiSelector().text("LoginActivity");
         assertNotNull("Wrong activity opened", activityLabel);
+        
     }
     
     public void testNotBroadcasting() throws UiObjectNotFoundException {   
@@ -152,6 +158,11 @@ public class TestFollowUI extends UiAutomatorTestCase {
         assertNotNull("Wrong activity opened", activityLabel);
         
         UiObject followButton = new UiObject(new UiSelector().text("Follow"));
+        followButton.clickAndWaitForNewWindow();
+        activityLabel = new UiSelector().text("SelectBroadcasterActivity");
+        assertNotNull("Wrong activity opened", activityLabel);
+        
+        followButton = new UiObject(new UiSelector().text("Follow"));
         UiObject followUsernameInput = new UiObject(new UiSelector().description("followUsername"));
         followUsernameInput.setText("test");
         followButton.click();
@@ -165,6 +176,7 @@ public class TestFollowUI extends UiAutomatorTestCase {
         activityLabel = new UiSelector().text("LoginActivity");
         assertNotNull("Wrong activity opened", activityLabel);
     }
+    */
 
     protected void tearDown() throws Exception {
         super.tearDown();

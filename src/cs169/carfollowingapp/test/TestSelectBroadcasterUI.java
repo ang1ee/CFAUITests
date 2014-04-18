@@ -1,22 +1,19 @@
 package cs169.carfollowingapp.test;
 
-import android.os.Handler;
-
 import com.android.uiautomator.core.UiObject;
 import com.android.uiautomator.core.UiObjectNotFoundException;
 import com.android.uiautomator.core.UiScrollable;
 import com.android.uiautomator.core.UiSelector;
 import com.android.uiautomator.testrunner.UiAutomatorTestCase;
 
+import junit.framework.TestCase;
 
-
-public class TestFrontPageUI extends UiAutomatorTestCase {
+public class TestSelectBroadcasterUI extends UiAutomatorTestCase {
 
 	protected void setUp() throws Exception {
         super.setUp();
     }
-    
-    public void testBroadcasting() throws UiObjectNotFoundException {   
+public void testSelectBroadcaster() throws UiObjectNotFoundException {   
         
         // Simulate a short press on the HOME button.
         getUiDevice().pressHome();
@@ -77,34 +74,15 @@ public class TestFrontPageUI extends UiAutomatorTestCase {
         UiSelector activityLabel = new UiSelector().text("FrontPageActivity");
         assertNotNull("Wrong activity opened for FrontPageActivity when login", activityLabel);
         
-        UiObject broadcastButton = new UiObject(new UiSelector().text("Broadcast"));
-        broadcastButton.clickAndWaitForNewWindow();
-        activityLabel = new UiSelector().text("BroadcastActivity");
-        assertNotNull("Wrong activity opened for BroadcastActivity when broadcast", activityLabel);
-        
+        UiObject followButton = new UiObject(new UiSelector().text("Follow"));
+        followButton.clickAndWaitForNewWindow();
+        activityLabel = new UiSelector().text("SelectBroadcasterActivity");
+        assertNotNull("Wrong activity opened", activityLabel);
 
-            	 UiObject stopBroadcastingButton = new UiObject(new UiSelector().text("Stop Broadcasting"));
-
-				stopBroadcastingButton.clickAndWaitForNewWindow();
-	
-                 activityLabel = new UiSelector().text("FrontPageActivity");
-                 assertNotNull("Wrong activity opened for FrontPageActivity when stop broadcast", activityLabel);
-                 
-                 UiObject logoutButton = new UiObject(new UiSelector().text("Logout"));
-
-					logoutButton.clickAndWaitForNewWindow();
-
-                 
-                 activityLabel = new UiSelector().text("LoginActivity");
-                 assertNotNull("Wrong activity opened", activityLabel);
-
-
-        
-        
     }
 
-    protected void tearDown() throws Exception {
-        super.tearDown();
-    }
+	protected void tearDown() throws Exception {
+		super.tearDown();
+	}
 
 }

@@ -30,17 +30,18 @@ public class TestLoginUI extends UiAutomatorTestCase {
         // the Apps tab. To simulate the user bringing up the Apps tab,
         // we create a UiSelector to find a tab with the text 
         // label “Apps”.
-        UiObject appsTab = new UiObject(new UiSelector()
-           .text("Apps"));
+        //UiObject appsTab = new UiObject(new UiSelector()
+        //   .text("Apps"));
         
         // Simulate a click to enter the Apps tab.
-        appsTab.click();
+        //appsTab.click();
 
         // Next, in the apps tabs, we can simulate a user swiping until
         // they come to the Settings app icon.  Since the container view 
         // is scrollable, we can use a UiScrollable object.
         UiScrollable appViews = new UiScrollable(new UiSelector()
            .scrollable(true));
+        //appViews = appViews.setAsHorizontalList();
         
         // Create a UiSelector to find the Settings app and simulate      
         // a user click to launch the app. 
