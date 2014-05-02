@@ -6,16 +6,11 @@ import com.android.uiautomator.core.UiScrollable;
 import com.android.uiautomator.core.UiSelector;
 import com.android.uiautomator.testrunner.UiAutomatorTestCase;
 
-import junit.framework.TestCase;
-
-public class TestSelectBroadcasterUI extends UiAutomatorTestCase {
+public class TestRegistrationUI extends UiAutomatorTestCase {
 
 	protected void setUp() throws Exception {
         super.setUp();
-    }
-public void testSelectBroadcaster() throws UiObjectNotFoundException {   
-        
-        // Simulate a short press on the HOME button.
+
         getUiDevice().pressHome();
         
         // We’re now in the home screen. Next, we want to simulate 
@@ -34,20 +29,18 @@ public void testSelectBroadcaster() throws UiObjectNotFoundException {
         // the Apps tab. To simulate the user bringing up the Apps tab,
         // we create a UiSelector to find a tab with the text 
         // label “Apps”.
-        UiObject appsTab = new UiObject(new UiSelector()
-           .text("Apps"));
+        //UiObject appsTab = new UiObject(new UiSelector()
+        //   .text("Apps"));
         
         // Simulate a click to enter the Apps tab.
-        appsTab.click();
+        //appsTab.click();
 
         // Next, in the apps tabs, we can simulate a user swiping until
         // they come to the Settings app icon.  Since the container view 
         // is scrollable, we can use a UiScrollable object.
         UiScrollable appViews = new UiScrollable(new UiSelector()
            .scrollable(true));
-        
-//        // Set the swiping mode to horizontal (the default is vertical)
-//        appViews.setAsHorizontalList();
+        //appViews = appViews.setAsHorizontalList();
         
         // Create a UiSelector to find the Settings app and simulate      
         // a user click to launch the app. 
@@ -61,26 +54,35 @@ public void testSelectBroadcaster() throws UiObjectNotFoundException {
            .packageName("cs169.carfollowingapp"));
         assertTrue("Unable to detect app", 
            cfaValidation.exists());   
+                    
+    }
+	public void testRegistration() throws UiObjectNotFoundException {   
+ 
+        UiObject registerButton = new UiObject(new UiSelector().text("Sign Up for Caravan"));
         
+
+        registerButton.clickAndWaitForNewWindow();
+                
+        UiObject label = new UiObject(new UiSelector().text("RegisterActivity"));
+        assertNotNull("RegisterActivity", label.getText());
         
         UiObject usernameInput = new UiObject(new UiSelector().description("Username"));
         UiObject passwordInput = new UiObject(new UiSelector().description("Password"));
-        UiObject loginButton = new UiObject(new UiSelector().text("Login"));
+        UiObject emailInput = new UiObject(new UiSelector().description("email"));
         
-        usernameInput.setText("test");
-        passwordInput.setText("test");
-        loginButton.clickAndWaitForNewWindow();
-                
-        UiSelector activityLabel = new UiSelector().text("FrontPageActivity");
-        assertNotNull("Wrong activity opened for FrontPageActivity when login", activityLabel);
+        usernameInput.setText("new");
+        passwordInput.setText("new");
+        emailInput.setText("new@gmail.com");
         
-        UiObject followButton = new UiObject(new UiSelector().text("Follow"));
-        followButton.clickAndWaitForNewWindow();
-        activityLabel = new UiSelector().text("SelectBroadcasterActivity");
-        assertNotNull("Wrong activity opened", activityLabel);
+        registerButton = new UiObject(new UiSelector().text("Register"));
+        registerButton.clickAndWaitForNewWindow();
+        
+        label = new UiObject(new UiSelector().text("LoginActivity"));
+        assertNotNull("LoginActivity", label.getText());
+
+
 
     }
-
 	protected void tearDown() throws Exception {
 		super.tearDown();
 	}

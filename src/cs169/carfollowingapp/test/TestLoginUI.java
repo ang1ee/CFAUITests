@@ -77,9 +77,11 @@ public class TestLoginUI extends UiAutomatorTestCase {
     public void testLoginNoSuchUser() throws UiObjectNotFoundException {   
         
         UiObject usernameInput = new UiObject(new UiSelector().description("Username"));
+        UiObject passwordInput = new UiObject(new UiSelector().description("Password"));
         UiObject loginButton = new UiObject(new UiSelector().text("Login"));
         
         usernameInput.setText("NoSuchUser");
+        passwordInput.setText("");
         loginButton.click();
         
         UiObject errorBox = new UiObject(new UiSelector().description("error text box"));
@@ -87,12 +89,17 @@ public class TestLoginUI extends UiAutomatorTestCase {
         
     }    
     
+    
+    
+
     public void testLoginIncorrectPassword() throws UiObjectNotFoundException {   
         
         UiObject usernameInput = new UiObject(new UiSelector().description("Username"));
+        UiObject passwordInput = new UiObject(new UiSelector().description("Password"));
         UiObject loginButton = new UiObject(new UiSelector().text("Login"));
         
         usernameInput.setText("test");
+        passwordInput.setText("");
         loginButton.click();
         
         UiObject errorBox = new UiObject(new UiSelector().description("error text box"));

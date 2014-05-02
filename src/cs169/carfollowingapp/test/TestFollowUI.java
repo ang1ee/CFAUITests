@@ -35,11 +35,11 @@ public class TestFollowUI extends UiAutomatorTestCase {
         // the Apps tab. To simulate the user bringing up the Apps tab,
         // we create a UiSelector to find a tab with the text 
         // label “Apps”.
-        UiObject appsTab = new UiObject(new UiSelector()
-           .text("Apps"));
+        //UiObject appsTab = new UiObject(new UiSelector()
+        //   .text("Apps"));
         
         // Simulate a click to enter the Apps tab.
-        appsTab.click();
+        //appsTab.click();
 
         // Next, in the apps tabs, we can simulate a user swiping until
         // they come to the Settings app icon.  Since the container view 
